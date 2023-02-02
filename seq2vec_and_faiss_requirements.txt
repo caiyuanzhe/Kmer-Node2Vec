@@ -1,0 +1,16 @@
+arrow==1.2.2
+Bio==1.3.3
+faiss==1.7.1
+fse==0.2.0
+gensim==3.8.3
+icecream==2.1.1
+Logbook==1.5.3
+networkx==2.7.1
+numba==0.54.1
+numba_progress==0.0.2
+numpy==1.19.2
+prettytable==3.0.0
+scikit_learn==1.0.2
+scipy==1.7.3
+setuptools==58.0.4
+tqdm==4.62.3
