@@ -65,7 +65,7 @@ Training the model is handled by the `src/cli.py` script which provides the foll
 ### Examples
 <p align="justify">
 
-(1). Learn the k-mer embedding with Kmer-Node2Vec algorithm. The first example trains an embedding based on the default dataset with standard hyperparameter settings. The script saves the embedding at the default path.</p>
+(1). Only learn the k-mer embedding with Kmer-Node2Vec algorithm. The first example trains an embedding based on the default dataset with standard hyperparameter settings. The script saves the embedding at the default path.</p>
 ```
 python3 src/cli.py
 ```
@@ -83,6 +83,6 @@ Using second-order ranom walks for sampling.
 python3 src/cli.py --P 1 --Q 0.001
 ```
 
-(2). Evaluate the k-mer embedding in tasks of sequence retrieval and classification. For sequence retrieval task, jump to examples/retrieval_task.py to adjust hyperparameter settings and run the task. For sequence classification task, jump to examples/classification_task.py to adjust hyperparameter settings and run the task.
+(2). Evaluate the k-mer embedding in tasks of sequence retrieval and classification. For sequence retrieval task, jump to examples/retrieval_task.py to adjust hyperparameter settings and run the task. For sequence classification task, jump to examples/classification_task.py to adjust hyperparameter settings and run the task. In sequence classification task, we have to obtain pre-trained DNA sequence embedding (an average of k-mer embedding in our paper) in advance, and we offer an implementation of computing DNA sequence embedding within k-mer embedding in examples/retrieval_task.py.
 
 --------------------------------------------------------------------------------

@@ -145,7 +145,6 @@ def main(args):
         workers=args.workers,
     )
     clf.fit(
-        graph=nx.DiGraph(),
         seqs=parse_seq([args.input_seqs_dir]),
         mer=args.mer,
         path_to_edg_list_file=args.edge_list_file,
