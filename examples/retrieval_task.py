@@ -46,7 +46,7 @@ class KMerEmbeddings:
     def train(self):
         """ Obtain the k-mer embedding. """
 
-        clf = KMerNode2Vec(p=self.p, q=self.q, workers=self.workers)
+        clf = KMerNode2Vec(p=self.p, q=self.q, workers=self.workers, dimensions=self.dimensions)
         clf.fit(
             seqs=self.seqs,
             mer=self.mer,
@@ -215,7 +215,7 @@ def kmer_embeddings(work_dir):
         p=1.0,
         q=0.001,
         mer=8,
-        dimensions=[128],
+        dimensions=128,
         workers=4,
         seq_dir=work_dir,
         kmer_vec_output_dir=work_dir,
@@ -265,7 +265,7 @@ def pipeline():
         Need to manually modify some file names in each Step.
     """
     start_time = time.time()
-    kmer_embeddings(work_dir='../data_dir/input/')  # Step1
+    kmer_embeddings(work_dir='../data_dir/input/')  # Step1: train the kmer embedding, you can skip this step if you have pre-trained kmer embedding.
     end_time = time.time()
     print('kmer_embedding costs {:.5f} s'.format(end_time - start_time))
 
