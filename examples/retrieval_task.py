@@ -228,8 +228,8 @@ def sequence_embeddings(work_dir):
         mer=8,  # consistent with the length k of pre-trained k-mers
         kmer2vec_file=work_dir+f"kmer-node2vec-embedding.txt",  # set this
         seq_dir=work_dir,
-        segment_length=8,
-        segment_number=10,
+        segment_length=150,  # set this
+        segment_number=1000,  # set this
         segment_file=work_dir+'segment.txt',
         extracted_original_segment_file=work_dir+'extracted_org_segment.txt',
         extracted_subsegment_file=work_dir+'extracted_sub_segment.txt',
