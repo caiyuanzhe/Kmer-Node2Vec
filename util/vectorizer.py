@@ -67,7 +67,7 @@ class SeqVectorizer(BaseVectorizer):
         BaseVectorizer.__init__(self, vecs)
 
     @Timer('to get sequence-level embeddings')
-    def train(self, sentences: List[str], vector_size: int = 128, mode='hier_pool'):
+    def train(self, sentences: List[str], vector_size: int = 128, mode='mean_pool'):
         """ mode:'mean_pool', 'max_pool', 'hier_pool' """
         word2vec = BaseVectorizer._map_word2vec(self)
         dimensions = len(self.vecs.vectors[0])
