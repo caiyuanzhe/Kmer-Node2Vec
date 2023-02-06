@@ -12,7 +12,7 @@ from pecanpy.wrappers import Timer
 
 def ptr_to_file(
     kmer2vec_method='kmg2vec',
-    seg2vec_method='AVG',
+    seg2vec_method='SeqVectorizer',
     input_file_dir='../data_dir/output/seg2vec/viral/',
 ):
     """ Return segments & subsegments with their vectors.
@@ -72,7 +72,7 @@ def create_index(
         path_to_seg_vec (str) : vectors to feed faiss.
             (default = None).
         path_to_faiss_idx str) : file that store vector indexes for faiss
-            (default = "../data_dir/output/topKN/{'faiss-idx'}-{'dna2vec'}-{'AVG'}").
+            (default = "../data_dir/output/topKN/{'faiss-idx'}-{'dna2vec'}-{'SeqVectorizer'}").
         dimension (int) : the input vector size
             (default = 128).
         method (str) : method to create faiss index, 'HNSW' or 'IVF' or
@@ -191,7 +191,7 @@ def precision(
     path_to_subseg_vec=None,
     path_to_subseg_name='../data_dir/output/seg2vec/SegmentNames-150bp.txt',
     path_to_seg_name='../data_dir/output/seg2vec/SegmentNames-150bp.txt',
-    path_to_faiss_idx=f"../data_dir/output/topKN/{'faiss-idx'}-{'dna2vec'}-{'AVG'}",
+    path_to_faiss_idx=f"../data_dir/output/topKN/{'faiss-idx'}-{'dna2vec'}-{'SeqVectorizer'}",
     top_kn=20,
 ):
     """

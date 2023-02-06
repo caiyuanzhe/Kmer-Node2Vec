@@ -61,27 +61,71 @@ class BaseVectorizer():
             raise ValueError('Fail to save embeddings')
 
 
-class AVG(BaseVectorizer):
+class SeqVectorizer(BaseVectorizer):
 
     def __init__(self, vecs):
         BaseVectorizer.__init__(self, vecs)
 
-    @Timer('to get embeddings with AVG method')
-    def train(self, sentences: List[str]):
+    @Timer('to get sequence-level embeddings')
+    def train(self, sentences: List[str], vector_size: int = 128, mode='hier_pool'):
+        """ mode:'mean_pool', 'max_pool', 'hier_pool' """
         word2vec = BaseVectorizer._map_word2vec(self)
         dimensions = len(self.vecs.vectors[0])
 
         # averaging vectors
         @njit(fastmath=True, nogil=True)
-        def avg_embeddings(sentence, word2vec_diz, vector_size=128):
+        def mean_pool(sentence, word2vec_diz, vector_size=vector_size):
             embedding = np.zeros((vector_size,), dtype=np.float32)
             bow = sentence.split()
             for word in bow:
                 embedding += word2vec_diz[word]
+                # print(len(word2vec_diz[word]))
+                # print(word2vec_diz[word][0])
             return embedding / float(len(bow))
 
+        # max pool vectors
+        @njit(fastmath=True, nogil=True)
+        def max_pool(sentence, word2vec_diz, vector_size=vector_size):
+            embedding = np.zeros((vector_size,), dtype=np.float32)
+            bow = sentence.split()
+            for word in bow:
+                word_vec = word2vec_diz[word]
+                for bit in range(0, vector_size+1):
+                    if word_vec[bit] > embedding[bit]:
+                        embedding[bit] = word_vec[bit]
+            return embedding
+
+        # max pool vectors
+        @njit(fastmath=True, nogil=True)
+        def hier_pool(sentence, word2vec_diz, window_size=2, vector_size=vector_size):
+            mean_pool_embeddings = list()
+            bow = sentence.split()
+
+            # local mean pool at a sliding window
+            idx = 0
+            while (idx < len(bow)):
+                tmp_embedding = np.zeros((vector_size,), dtype=np.float32)
+                for word in bow[idx:idx+window_size]:
+                    tmp_embedding += word2vec_diz[word]
+                tmp_embedding /= window_size
+                mean_pool_embeddings.append(tmp_embedding)
+                idx += window_size - 1
+
+            # global max pool across sliding windows
+            embedding = np.zeros((vector_size,), dtype=np.float32)
+            for emb in mean_pool_embeddings:
+                for bit in range(0, vector_size+1):
+                    if emb[bit] > embedding[bit]:
+                        embedding[bit] = emb[bit]
+            return embedding
+
         for i in tqdm(range(len(sentences))):
-            emb = avg_embeddings(sentences[i], word2vec, dimensions)
+            if mode == 'mean_pool':
+                emb = mean_pool(sentences[i], word2vec, vector_size=dimensions)
+            elif mode == 'max_pool':
+                emb = max_pool(sentences[i], word2vec, vector_size=dimensions)
+            else:  # hier_pool
+                emb = hier_pool(sentences[i], word2vec, window_size=2, vector_size=dimensions)
             self.embs.append(emb)
 
         self.embs = np.array(self.embs)

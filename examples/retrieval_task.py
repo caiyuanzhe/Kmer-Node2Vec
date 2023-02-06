@@ -103,10 +103,10 @@ class SequenceEmbeddings:
             segs = [line.split('\n')[0] for line in fp.readlines()]
         sentences = seg2sentence(segs, self.mer)  # Tokenize
 
-        from util.vectorizer import AVG
+        from util.vectorizer import SeqVectorizer
         vecs = KeyedVectors.load_word2vec_format(self.kmer2vec_file)  # k-mer vectors
 
-        clf = AVG(vecs)
+        clf = SeqVectorizer(vecs)
         clf.train(sentences)
         clf.save_embs_format(
             self.seg_vec_output_dir,
@@ -131,10 +131,10 @@ class SequenceEmbeddings:
             subsegs = [line.split('\n')[0] for line in fp.readlines()]
         sentences = seg2sentence(subsegs, self.mer)
 
-        from util.vectorizer import AVG
+        from util.vectorizer import SeqVectorizer
         vecs = KeyedVectors.load_word2vec_format(self.kmer2vec_file)  # k-mer2vec file
 
-        clf = AVG(vecs)
+        clf = SeqVectorizer(vecs)
         clf.train(sentences)
         clf.save_embs_format(
             self.seg_vec_output_dir,
