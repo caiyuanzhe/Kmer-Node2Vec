@@ -95,7 +95,7 @@ class SeqVectorizer(BaseVectorizer):
                         embedding[bit] = word_vec[bit]
             return embedding
 
-        # max pool vectors
+        # hier pool vectors
         @njit(fastmath=True, nogil=True)
         def hier_pool(sentence, word2vec_diz, window_size=2, vector_size=vector_size):
             mean_pool_embeddings = list()
