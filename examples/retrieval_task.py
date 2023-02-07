@@ -2,11 +2,7 @@
 import sys
 sys.path.extend(['.', '..'])
 import os
-import arrow
-import gensim
-import networkx as nx
 import time
-import numpy as np
 from gensim.models import KeyedVectors
 
 from util.faiss_getprecision import create_index
@@ -16,9 +12,7 @@ from util.perf_tools import Tee
 from src.generators import seq2segs
 from src.generators import seg2sentence
 from src.generators import extract_seg
-from src.generators import extract_kmer
 from src.generators import parse_seq
-from src.generators import save_word2vec_format
 
 from src.kmernode2vec import KMerNode2Vec
 

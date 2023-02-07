@@ -3,7 +3,6 @@ import sys
 sys.path.extend(['.', '..'])
 import arrow
 import argparse
-import networkx as nx
 from prettytable import PrettyTable
 
 from src.generators import parse_seq

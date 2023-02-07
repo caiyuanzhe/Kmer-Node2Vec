@@ -4,10 +4,6 @@ from sklearn.model_selection import cross_val_predict
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegressionCV
-from sklearn.svm import SVC
-from sklearn.model_selection import cross_validate
-from sklearn.neighbors import KNeighborsClassifier
 from prettytable import PrettyTable
 import logging
 import warnings

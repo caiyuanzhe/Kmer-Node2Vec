@@ -4,9 +4,6 @@ import numpy as np
 import gensim
 from tqdm import tqdm
 from typing import List
-from pecanpy.wrappers import Timer
-from collections import defaultdict
-
 from numba import njit
 from numba import types
 from numba.typed import Dict
@@ -14,6 +11,8 @@ from numba.core.errors import NumbaDeprecationWarning, NumbaPendingDeprecationWa
 import warnings
 warnings.simplefilter('ignore', category=NumbaDeprecationWarning)
 warnings.simplefilter('ignore', category=NumbaPendingDeprecationWarning)
+
+from perf_tools import Timer
 
 
 class BaseVectorizer():

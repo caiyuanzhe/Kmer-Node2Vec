@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
 import re
-import time
 import random
 from random import sample
 from Bio import SeqIO
@@ -9,31 +8,6 @@ from math import floor
 from typing import List
 from numpy import zeros, dtype, float32 as REAL, ascontiguousarray, fromstring
 from gensim import utils
-
-
-class Timer:
-    """Timer for logging runtime of function."""
-
-    def __init__(self, name, verbose=True):
-        self.name = name
-        self.verbose = verbose
-
-    def __call__(self, func):
-        """Call timer decorator."""
-
-        def wrapper(*args, **kwargs):
-            start = time.time()
-            result = func(*args, **kwargs)
-            duration = time.time() - start
-
-            hrs = int(duration // 3600)
-            mins = int(duration % 3600 // 60)
-            secs = duration % 60
-            print(f"Took {hrs:02d}:{mins:02d}:{secs:05.2f} to {self.name}")
-
-            return result
-
-        return wrapper if self.verbose else func
 
 
 def parse_seq(path_to_input: str):

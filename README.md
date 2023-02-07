@@ -23,6 +23,7 @@ numba==0.54.1
 numba_progress==0.0.2
 numpy==1.20.3
 pandas==1.5.2
+pecanpy==2.0.3
 prettytable==3.2.0
 psutil==5.9.1
 scikit_learn==1.2.1

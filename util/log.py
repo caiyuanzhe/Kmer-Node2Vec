@@ -3,6 +3,7 @@ import sys
 
 default_log = f"log/{arrow.utcnow().format('YYYYMMDD-HHmm')}-KMerGraph2Vec-Info.log"
 
+
 class Tee(object):
     """ Logger for parameters and execution info of function """
 
