@@ -98,25 +98,24 @@ class SeqVectorizer(BaseVectorizer):
         # hierarchical pool vectors
         @njit(fastmath=True, nogil=True)
         def hier_pool(sentence, word2vec_diz, window_size=2, vector_size=vector_size):
-            mean_pool_embeddings = list()
             bow = sentence.split()
-
-            # local mean pool at a sliding window
+            embedding = np.zeros((vector_size,), dtype=np.float32)
             idx = 0
             while (idx < len(bow)):
-                tmp_embedding = np.zeros((vector_size,), dtype=np.float32)
+                mean_embedding = np.zeros((vector_size,), dtype=np.float32)
+
+                # local mean pool at a sliding window
                 for word in bow[idx:idx+window_size]:
-                    tmp_embedding += word2vec_diz[word]
-                tmp_embedding /= window_size
-                mean_pool_embeddings.append(tmp_embedding)
+                    mean_embedding += word2vec_diz[word]
+                mean_embedding /= window_size
+
+                # global max pool across sliding windows
+                for bit in range(0, vector_size+1):
+                    if mean_embedding[bit] > embedding[bit]:
+                        embedding[bit] = mean_embedding[bit]
+
                 idx += window_size - 1
 
-            # global max pool across sliding windows
-            embedding = np.zeros((vector_size,), dtype=np.float32)
-            for emb in mean_pool_embeddings:
-                for bit in range(0, vector_size+1):
-                    if emb[bit] > embedding[bit]:
-                        embedding[bit] = emb[bit]
             return embedding
 
         for i in tqdm(range(len(sentences))):
