@@ -67,8 +67,11 @@ class SeqVectorizer(BaseVectorizer):
         BaseVectorizer.__init__(self, vecs)
 
     @Timer('to get sequence-level embeddings')
-    def train(self, sentences: List[str], vector_size: int = 128, mode='mean_pool'):
-        """ mode:'mean_pool', 'max_pool', 'hier_pool' """
+    def train(self, sentences: List[str], vector_size: int = 128, mode: str = 'mean_pool'):
+        """ mode:'mean_pool', 'max_pool', 'mean_concat_max_pool, 'hier_pool'
+            Note that mode of 'mean_concat_max_pool' is only recommended
+            for short sequences (e.g., 150bp segments).
+        """
         word2vec = BaseVectorizer._map_word2vec(self)
         dimensions = len(self.vecs.vectors[0])
 
@@ -79,8 +82,6 @@ class SeqVectorizer(BaseVectorizer):
             bow = sentence.split()
             for word in bow:
                 embedding += word2vec_diz[word]
-                # print(len(word2vec_diz[word]))
-                # print(word2vec_diz[word][0])
             return embedding / float(len(bow))
 
         # max pool vectors
@@ -95,7 +96,7 @@ class SeqVectorizer(BaseVectorizer):
                         embedding[bit] = word_vec[bit]
             return embedding
 
-        # hier pool vectors
+        # hierarchical pool vectors
         @njit(fastmath=True, nogil=True)
         def hier_pool(sentence, word2vec_diz, window_size=2, vector_size=vector_size):
             mean_pool_embeddings = list()
@@ -124,6 +125,10 @@ class SeqVectorizer(BaseVectorizer):
                 emb = mean_pool(sentences[i], word2vec, vector_size=dimensions)
             elif mode == 'max_pool':
                 emb = max_pool(sentences[i], word2vec, vector_size=dimensions)
+            elif mode == 'mean_concat_max_pool':
+                emb1 = mean_pool(sentences[i], word2vec, vector_size=dimensions)
+                emb2 = max_pool(sentences[i], word2vec, vector_size=dimensions)
+                emb = np.concatenate((emb1, emb2))  # dimensions = 2*dimensions
             else:  # hier_pool
                 emb = hier_pool(sentences[i], word2vec, window_size=2, vector_size=dimensions)
             self.embs.append(emb)

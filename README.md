@@ -2,7 +2,7 @@ Kmer-Node2Vec
 ====================================
 Kmer-Node2Vec is an open-source library to train fast and high-quality k-mer embedding from the k-mer graph. 
 Within the k-mer embedding, we can easily compute the DNA sequence embedding. In our paper, the DNA sequence embedding is an average of the k-mer embedding.
-
+See more details in https://www.biorxiv.org/content/10.1101/2022.08.30.505832v3
 ------------------------------------
 
 ### Requirements

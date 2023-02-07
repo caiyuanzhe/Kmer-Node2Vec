@@ -135,7 +135,7 @@ class SequenceEmbeddings:
         vecs = KeyedVectors.load_word2vec_format(self.kmer2vec_file)  # k-mer2vec file
 
         clf = SeqVectorizer(vecs)
-        clf.train(sentences)
+        clf.train(sentences, vector_size=128, mode='mean_pool')
         clf.save_embs_format(
             self.seg_vec_output_dir,
             f"{'SubSegmentVectors'}"
