@@ -8,7 +8,7 @@ import numpy as np
 from tqdm import tqdm
 from prettytable import PrettyTable
 
-from perf_tools import Timer
+from pecanpy.cli import Timer
 
 
 def ptr_to_file(

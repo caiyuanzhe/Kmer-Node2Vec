@@ -8,29 +8,10 @@ See more details in the paper: [Kmer-Node2Vec: a Fast and Efficient Method for K
 ------------------------------------
 
 ### Requirements
+The codebase is implemented in Python 3.8 package versions. 
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-The codebase is implemented in Python 3.8 package versions used for development are just below. 
-```
-arrow==1.2.2
-Bio==1.5.3
-faiss==1.5.3
-faiss_cpu==1.7.3
-gensim==4.1.0
-icecream==2.1.1
-Logbook==1.5.3
-networkx==2.6.3
-numba==0.54.1
-numba_progress==0.0.2
-numpy==1.20.3
-pandas==1.5.2
-pecanpy==2.0.3
-prettytable==3.2.0
-psutil==5.9.1
-scikit_learn==1.2.1
-scipy==1.7.3
-setuptools==58.0.4
-tqdm==4.62.3
-```
+
 ### Datasets
 <p align="justify">
 The code takes FASTA format files with file extension of **.fna**. Note that all training FASTA format files should be under the same input directory. A sample FASTA format file is included in the  `data_dir/input/` directory. </p>

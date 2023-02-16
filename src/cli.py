@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
 sys.path.extend(['.', '..'])
-import arrow
 import argparse
 from prettytable import PrettyTable
 
@@ -14,7 +13,7 @@ class ParameterParser:
     def __init__(self, print_params: bool = True):
         self.print_params = print_params
         self.parser = argparse.ArgumentParser(
-            description="Run KMerGraph2Vec."
+            description="Run Kmer-Node2Vec."
         )
         self.parsed_args = None
 
@@ -29,21 +28,21 @@ class ParameterParser:
         self.parser.add_argument(
             '--input-seqs-dir',
             nargs='?',
-            default='data_dir/input/demo/',
+            default='../data_dir/input/',
             help='Sequence files directory.'
         )
 
         self.parser.add_argument(
             '--edge-list-file',
             nargs='?',
-            default='data_dir/output/edge-list-file-{}.edg'.format(arrow.utcnow().format('YYYYMMDD-HHmm')),
+            default='../data_dir/input/edge-list-file.edg',
             help='Edge file path.'
         )
 
         self.parser.add_argument(
             '--output',
             nargs='?',
-            default='data_dir/output/kmernode2vec-{}.txt'.format(arrow.utcnow().format('YYYYMMDD-HHmm')),
+            default='../data_dir/input/kmernode2vec.txt',
             help='Embeddings path.'
         )
 
