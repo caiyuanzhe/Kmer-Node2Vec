@@ -9,6 +9,7 @@ See more details in the paper: [Kmer-Node2Vec: a Fast and Efficient Method for K
 
 ### Requirements
 The codebase is implemented in Python 3.8 package versions. 
+
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 
