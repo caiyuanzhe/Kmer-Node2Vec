@@ -12,7 +12,7 @@ import warnings
 warnings.simplefilter('ignore', category=NumbaDeprecationWarning)
 warnings.simplefilter('ignore', category=NumbaPendingDeprecationWarning)
 
-from perf_tools import Timer
+from pecanpy.cli import Timer
 
 
 class BaseVectorizer():

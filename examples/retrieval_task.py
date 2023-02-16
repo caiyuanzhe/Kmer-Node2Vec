@@ -263,8 +263,8 @@ def pipeline():
     end_time = time.time()
     print('kmer_embedding costs {:.5f} s'.format(end_time - start_time))
 
-    # sequence_embeddings(work_dir='../data_dir/input/')  # Step2
-    # sequence_retrieval(work_dir='../data_dir/input/')  # Step3
+    sequence_embeddings(work_dir='../data_dir/input/')  # Step2
+    sequence_retrieval(work_dir='../data_dir/input/')  # Step3
 
 
 if __name__ == '__main__':
