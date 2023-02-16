@@ -8,7 +8,7 @@ from math import floor
 from typing import List
 from numpy import zeros, dtype, float32 as REAL, ascontiguousarray, fromstring
 from gensim import utils
-
+from pecanpy.cli import Timer
 
 def parse_seq(path_to_input: str):
     """ Return a list containing DNA seqment(s) captured in fna file(s)."""
