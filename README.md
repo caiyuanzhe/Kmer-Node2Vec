@@ -22,8 +22,8 @@ Training the model is handled by the `src/cli.py` script which provides the foll
 #### Input and output options
 ```
   --input-seqs-dir   STR   Sequence files directory.   Default is `data_dir/input/`.
-  --output           STR   K-mer embedding path.       Default is `data_dir/output/kmer-embedding.txt`.
-  --edge-list-file   STR   Edge file path.             Default is `data_dir/output/edge-list-file.edg`.
+  --output           STR   K-mer embedding path.       Default is `data_dir/input/kmer-embedding.txt`.
+  --edge-list-file   STR   Edge file path.             Default is `data_dir/input/edge-list-file.edg`.
 ```
 #### Random walk options
 ```
