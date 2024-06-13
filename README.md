@@ -1,6 +1,6 @@
-SeqGraph2Vec
+Kmer-Node2Vec
 ====================================
-SeqGraph2Vec is an open-source library to train fast and high-quality k-mer embedding from the k-mer graph. 
+Kmer-Node2Vec is an open-source library to train fast and high-quality k-mer embedding from the k-mer graph. 
 Within the k-mer embedding, we can easily compute the DNA sequence embedding. In our paper, the DNA sequence embedding is an average of the k-mer embedding.
 
 See more details in the paper: [Kmer-Node2Vec: a Fast and Efficient Method for Kmer Embedding from the Kmer Co-occurrence Graph, with Applications to DNA Sequences](https://www.biorxiv.org/content/10.1101/2022.08.30.505832v3)
